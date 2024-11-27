@@ -1,0 +1,65 @@
+<?php
+// update_tooth_status.php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include '../db_connect.php';
+
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['error' => 'Invalid request method']);
+    exit;
+}
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($data['patient_id']) || !isset($data['tooth_number']) || !isset($data['status'])) {
+    echo json_encode(['error' => 'Missing required fields']);
+    exit;
+}
+
+try {
+    $stmt = $conn->prepare("
+        INSERT INTO tooth_data (patient_id, tooth_number, status, last_checked)
+        VALUES (?, ?, ?, CURRENT_DATE)
+        ON DUPLICATE KEY UPDATE 
+            status = VALUES(status),
+            last_checked = CURRENT_DATE
+    ");
+
+    if (!$stmt) {
+        throw new Exception("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("iis", 
+        $data['patient_id'],
+        $data['tooth_number'],
+        $data['status']
+    );
+
+    if (!$stmt->execute()) {
+        throw new Exception("Execute failed: " . $stmt->error);
+    }
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'Tooth status updated successfully'
+    ]);
+
+} catch (Exception $e) {
+    error_log("Error in update_tooth_status.php: " . $e->getMessage());
+    echo json_encode([
+        'error' => 'Internal server error',
+        'message' => $e->getMessage()
+    ]);
+} finally {
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+    $conn->close();
+}
+
+
+
+
