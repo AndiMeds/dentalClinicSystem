@@ -1,0 +1,105 @@
+body {
+    font-family: 'Varela Round', sans-serif;
+    margin: 0;
+    background-color: #ffff;
+    color: #333;
+}
+.layout {
+    display: flex;
+}
+
+.main-content {
+    margin-left: 15px;
+    margin-top: 55px;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+.thin-line {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 20px 0;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-input, .filter-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+.action-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    margin: 0 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.action-btn:hover {
+    background-color: #2980b9;
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .search-input, .filter-select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

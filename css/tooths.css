@@ -1,0 +1,415 @@
+:root {
+    --primary-color: #0077b6;
+    --secondary-color: #023e8a;
+    --accent-color: #00b4d8;
+    --background-color: #f8f9fa;
+    --card-background: #ffffff;
+    --text-color: #212529;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --tooth-no-treatment: #ffffff;
+    --tooth-has-treatment: #4dabf7;
+  }
+  
+  body {
+    font-family: Varela Round, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    line-height: 1.5;
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--card-background);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    gap: 30px;
+  }
+  
+  .left-column, .right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .chart-container {
+    position: relative;
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+    text-align: center;
+  }
+  
+  .chart-container svg {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+  }
+  
+  #Spots polygon, #Spots path {
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  
+  #Spots polygon:hover, #Spots polygon:active, 
+  #Spots path:hover, #Spots path:active {
+    fill: #e9ecef !important;
+    stroke: var(--accent-color);
+    stroke-width: 2px;
+  }
+  
+  .tooth {
+    stroke-width: 1;
+    stroke: #495057;
+    fill: var(--tooth-no-treatment);
+  }
+  
+  .has-treatment {
+    fill: var(--tooth-has-treatment);
+  }
+  
+  .clicked {
+    fill:rgb(231, 255, 96);
+    stroke-width: 2;
+    stroke: var(--accent-color);
+    filter: drop-shadow(0 0 3px rgba(0, 180, 216, 0.5));
+  }
+  
+  .tooth-status {
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .tooth-status.healthy { background-color: #e9ecef; color: #495057; }
+  .tooth-status.cavity { background-color: #ffcccb; color: #c71f16; }
+  .tooth-status.filled { background-color: #bde0fe; color: #1e6091; }
+  .tooth-status.crown { background-color: #ffd6a5; color: #b76e00; }
+  .tooth-status.missing { background-color: #ced4da; color: #495057; }
+  .tooth-status.in-progress { background-color: #caffbf; color: #2d6a4f; }
+  .tooth-status.has-treatment { background-color: var(--tooth-has-treatment); color: #ffffff; }
+  
+  .info-history-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  #toothInfo, #treatmentHistory {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+    flex: 1;
+  }
+  
+  #toothInfo h3, #treatmentHistory h4 {
+    margin-top: 0;
+    color:#000;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  #treatmentHistory ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #treatmentHistory li {
+    background: #f1f3f5;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-left: 3px solid var(--accent-color);
+    transition: var(--transition);
+  }
+  
+  #treatmentHistory li:last-child {
+    margin-bottom: 0;
+  }
+  
+  #treatmentHistory li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  
+  .action-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+  }
+  
+  .action-buttons button {
+    flex: 1;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .action-buttons button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  .tooltip {
+    position: absolute;
+    background-color: #212529;
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0;
+    transition: var(--transition);
+    transform: translateY(5px);
+    z-index: 1000;
+    width: 220px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .tooltip-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 6px;
+  }
+  
+  .tooltip-content {
+    margin-bottom: 6px;
+  }
+  
+  .tooltip-treatment {
+    font-style: italic;
+    font-size: 11px;
+    color: #adb5bd;
+  }
+  
+  .treatment-plan {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .treatment-form {
+    margin-top: -40px;
+    background: var(--card-background);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #000;
+    font-size: 14px;
+  }
+  
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    transition: var(--transition);
+    font-size: 14px;
+    color: var(--text-color);
+  }
+  
+  input[type="text"]:focus, input[type="date"]:focus, select:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 25px;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+  }
+  
+  th, td {
+    border: none;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  tr {
+    transition: var(--transition);
+  }
+  
+  tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .delete-btn, .edit-btn {
+    width: 32px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .delete-btn {
+    background: linear-gradient(135deg, #ff6b6b, #f03e3e);
+    color: #fff;
+  }
+  
+  .edit-btn {
+    background: linear-gradient(135deg, #4dabf7, #3b5bdb);
+    color: #fff;
+  }
+  
+  .delete-btn:hover, .edit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  }
+  
+  .delete-btn:active, .edit-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .delete-btn i, .edit-btn i {
+    font-size: 14px;
+  }
+  
+  @media (max-width: 1024px) {
+    .container {
+      flex-direction: column;
+      padding: 25px;
+    }
+  
+    .chart-container, .treatment-plan {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 25px;
+    }
+  
+    .action-buttons {
+      flex-direction: column;
+    }
+  
+    .action-buttons button {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    .container {
+      padding: 15px;
+    }
+  
+    table {
+      font-size: 13px;
+    }
+  
+    th, td {
+      padding: 10px 12px;
+    }
+  
+    .delete-btn, .edit-btn {
+      width: 28px;
+      height: 28px;
+    }
+  
+    .delete-btn i, .edit-btn i {
+      font-size: 12px;
+    }
+  }

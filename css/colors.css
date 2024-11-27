@@ -1,0 +1,47 @@
+:root {
+    --dental-blue: #4A90E2;      /* Primary color */
+    --light-blue: #EDF5FC;       /* Background color */
+    --text-dark: #333333;
+    --white: #FFFFFF;
+}
+
+
+:root {
+    /* Primary Colors */
+    --brand-blue: #2D8BB7;         /* Main brand color - professional, trustworthy */
+    --mint-fresh: #66C4B6;         /* Secondary - fresh, clean feeling */
+    
+    /* Neutral Colors */
+    --white-pure: #FFFFFF;         /* Pure white - cleanliness */
+    --gray-light: #F7F9FA;        /* Light background */
+    --gray-medium: #E8ECEF;       /* Borders, dividers */
+    --gray-text: #5A6D7C;         /* Body text */
+    
+    /* Accent Colors */
+    --sky-light: #E8F4F9;         /* Light backgrounds, highlights */
+    --blue-dark: #1B5577;         /* Text hover, buttons hover */
+    
+    /* Feedback Colors */
+    --success-green: #4CAF50;     /* Success messages */
+    --warning-yellow: #FFC107;    /* Warning messages */
+    --error-red: #FF5252;         /* Error messages */
+}
+
+/* Example usage */
+body {
+    background-color: var(--white-pure);
+    color: var(--gray-text);
+}
+
+.button-primary {
+    background-color: var(--brand-blue);
+    color: var(--white-pure);
+}
+
+.section-highlight {
+    background-color: var(--sky-light);
+}
+
+.alert-success {
+    color: var(--success-green);
+}
