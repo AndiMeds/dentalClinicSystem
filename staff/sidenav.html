@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/css/sidenav.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <img src="logo.png" alt="Dental Clinic Logo">
+                <div class="logo_name">ARCIAGA - JUNTILLA TMJ - ORTHO DENTAL CLINIC</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="staff_dashboard.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="calendar.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="links_name">Calendar</span>
+                </a>
+                <span class="tooltip">Calendar</span>
+            </li>
+            <li>
+                <a href="appointments.php">
+                    <i class='bx bx-calendar-alt'></i>
+                    <span class="links_name">Appointments</span>
+                </a>
+                <span class="tooltip">Appointments</span>
+            </li>
+            <li>
+                <a href="patients.php">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Patients</span>
+                </a>
+                <span class="tooltip">Patients</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-donate-heart'></i>
+                    <span class="links_name">Treatments</span>
+                </a>
+                <span class="tooltip">Treatments</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-wallet-alt'></i>
+                    <span class="links_name">Billing</span>
+                </a>
+                <span class="tooltip">Billing</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <div class="name_job">
+                    </div>
+                </div>
+                <a href="/reusables/logout.php">
+                    <i class='bx bx-log-out' id="log_out" ></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const btn = document.querySelector("#btn");
+        const sidebar = document.querySelector(".sidebar");
+        const homeContent = document.querySelector(".home_content");
+
+        // Check if the sidebar was previously active and apply the class
+        if (localStorage.getItem("sidebarActive") === "true") {
+            sidebar.classList.add("active");
+            homeContent.classList.add("active");
+        }
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+            homeContent.classList.toggle("active");
+
+            // Save the sidebar's state in localStorage
+            if (sidebar.classList.contains("active")) {
+                localStorage.setItem("sidebarActive", "true");
+            } else {
+                localStorage.setItem("sidebarActive", "false");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
